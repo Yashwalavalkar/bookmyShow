@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-const BookingDetails = () => {
+const BookingDetails = () => {  
   const bookingDetail = useSelector((state)=>state.bookingDetails);
   if (!bookingDetail.movie && !bookingDetail.time && Object.keys(bookingDetail.seats || {}).length === 0) {
     return <div>No booking details available.</div>;
