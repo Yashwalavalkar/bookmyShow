@@ -5,7 +5,8 @@ function App() {
   return (
     <div className="">
       <div className='m-3'>
-        <Home/>
+        {/* home page is imported here */}
+        <Home/>``
       </div>
     </div>
   );

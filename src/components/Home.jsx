@@ -9,6 +9,7 @@ const Home = () => {
   const [activeButton1, setActiveButton1] = useState(null);
   const [activeButton2, setActiveButton2] = useState(null);
 
+  //state is declared
   const [data, setData] = useState({
     movie: '',
     time: '',
@@ -21,6 +22,8 @@ const Home = () => {
       d2: ''
     }
   });
+
+  // dispating action
   const dispatch = useDispatch();
   const handleClick = async (e)=>{
     e.preventDefault();
@@ -44,6 +47,7 @@ const Home = () => {
       console.log(error)
     }
   }
+  //set the input changing data to the state
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
@@ -54,7 +58,7 @@ const Home = () => {
       }
     }));
   };
-
+// set the movie data
   const handleMovieClick = (movie, buttonId) => {
     setData((prevData) => ({
       ...prevData,
@@ -62,7 +66,7 @@ const Home = () => {
     }));
     setActiveButton(buttonId);
   };
-
+// set the time data to state
   const handleTimeClick = (time, buttonId) => {
     setData((prevData) => ({
       ...prevData,
@@ -70,10 +74,11 @@ const Home = () => {
     }));
     setActiveButton1(buttonId);
   };
-
+// set the seat data to state
   const handleSeatClick = (seatType, buttonId) => {
     setActiveButton2(buttonId);
   };
+  
   return (
     <div>
       <div className="row">
