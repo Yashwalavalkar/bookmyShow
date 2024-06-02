@@ -6,7 +6,7 @@ function App() {
     <div className="">
       <div className='m-3'>
         {/* home page is imported here */}
-        <Home/>``
+        <Home/>
       </div>
     </div>
   );

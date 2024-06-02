@@ -1,3 +1,5 @@
+// Booing Schema that helps to transfer the data to backend 
+
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 

@@ -1,31 +1,67 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-//the booking details are shown in the side box 
-//here use of the redux for displaying the data
-const BookingDetails = () => {  
-  const bookingDetail = useSelector((state)=>state.bookingDetails);
-  if (!bookingDetail.movie && !bookingDetail.time && Object.keys(bookingDetail.seats || {}).length === 0) {
-    return <div>No booking details available.</div>;
-  }
-  return (
-    <div>
-      <div className='border mt-5 p-4' style={{height:'400px'}}>
-        <div className='d-flex m-2'>
-          <h5>Booking Details - &nbsp;</h5>{bookingDetail.movie}
-        </div>
-        <div className='d-flex m-2'>
-          <h5>Booking Time -&nbsp;</h5>{bookingDetail.time}
-        </div>
-        {/* Here mapping is used for displaying the data */}
-        <div className='m-2'>
-          <h5>Booking Seat -</h5>
-          {Object.entries(bookingDetail.seats).map(([seatType,seatValue])=>(
-          <li key={seatType} type='square'>{seatType.toUpperCase()}: {seatValue}</li>
-        ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-export default BookingDetails;
+import React, { useEffect, useState } from "react";
 
+const BookingDetails = () => {
+  //The fetching data is comming here
+  const [data, setData] = useState(null);
+
+  //Function for fetching the data from database
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://bookmyshow-6-6lon.onrender.com/api/booking",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Each render refresh the page that the lastest data will be visible
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <div className="container border">
+      <h1>Booking Details</h1>
+      {/* Displaying the data here */}
+      {data && data.message === "No booking details available." ? (
+        <p>No Booking Details</p>
+      ) : data ? (
+        <div>
+          <p>
+            <strong>Movie:</strong> {data.movie}
+          </p>
+          <p>
+            <strong>Time:</strong> {data.time}
+          </p>
+          <p>
+            <strong>Seats:</strong>
+          </p>
+          {data.seats &&
+            Object.entries(data.seats).map(([seat, value]) => (
+              <span className="d-flex" key={seat}>
+                {seat}: {value ? value : ""}{" "}
+              </span>
+            ))}
+        </div>
+      ) : (
+        <h6>Loading ...</h6>
+      )}
+    </div>
+  );
+};
+
+export default BookingDetails;

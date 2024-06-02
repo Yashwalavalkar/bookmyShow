@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const mongoURI = 'mongodb+srv://gofoodpro:gofoodpro0077@cluster0.squ7qcj.mongodb.net/bookmyShow?retryWrites=true&w=majority&appName=Cluster0'
+require('dotenv').config();
+const mongoURI = process.env.MONGO_API 
 
 const mongoDb = async () =>{
     try{
@@ -8,7 +9,7 @@ const mongoDb = async () =>{
     }catch(error){
         console.log(error);
         console.log('error is occour')
-    }
+    } 
 }
 
 module.exports = mongoDb;

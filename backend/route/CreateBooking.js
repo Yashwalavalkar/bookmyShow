@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Booking = require('../model/Booking');
 
+//created a route for creating a booking 
+
 router.post("/createbooking",async(req,res)=>{
     try{
         await Booking.create({
