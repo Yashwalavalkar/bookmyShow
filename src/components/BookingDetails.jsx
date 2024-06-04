@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 const BookingDetails = () => {
   //The fetching data is comming here
   const [data, setData] = useState(null);
-
   //Function for fetching the data from database
   const fetchData = async () => {
     try {
@@ -31,7 +30,7 @@ const BookingDetails = () => {
   // Each render refresh the page that the lastest data will be visible
   useEffect(() => {
     fetchData();
-  }, []);
+  });
 
   return (
     <div className="container border">

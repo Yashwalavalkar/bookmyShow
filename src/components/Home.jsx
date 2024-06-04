@@ -41,7 +41,6 @@ const Home = () => {
     setActiveButton(null);
     setActiveButton1(null);
     setActiveButton2(null);
-
     try {
       const response = await fetch(
         "https://bookmyshow-6-6lon.onrender.com/api/CreateBooking",
