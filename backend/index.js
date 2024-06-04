@@ -7,7 +7,7 @@ const Booking = require("./model/Booking");
 
 // Connect to MongoDB
 mongoDb();
-
+app.use(cors());
 // Get allowed origins from environment variables
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "https://radiant-pasca-cf3c66.netlify.app");
