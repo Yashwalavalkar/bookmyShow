@@ -1,29 +1,33 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
-const PORT = process.env.PORT;
+const PORT = 8000;
 const mongoDb = require("./db");
 const cors = require("cors");
 const Booking = require("./model/Booking");
+
 // Connect to MongoDB
 mongoDb();
-app.use(cors());
 
+// Get allowed origins from environment variables
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "https://radiant-pasca-cf3c66.netlify.app");
   res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+  ); 
   next();
 });
+
 
 // Parse JSON bodies
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "hello from backed" });
+  res.json({ message: "hello from backend" });
 });
+
+
+
 
 app.get("/api/booking", async (req, res) => {
   try {
@@ -39,7 +43,10 @@ app.get("/api/booking", async (req, res) => {
   }
 });
 
+
 app.use("/api", require("./route/CreateBooking"));
+
+
 app.listen(PORT, () => {
-  console.log(`port is listening ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
